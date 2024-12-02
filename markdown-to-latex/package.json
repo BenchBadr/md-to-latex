@@ -1,0 +1,20 @@
+{
+  "name": "markdown-to-latex",
+  "version": "1.0.0",
+  "description": "A library to convert Markdown to LaTeX",
+  "main": "lib/converter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "demo": "node demo/demo.js"
+  },
+  "keywords": [
+    "markdown",
+    "latex",
+    "converter"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "markdown-it": "^12.3.2"
+  }
+}
