@@ -13,8 +13,5 @@
     "converter"
   ],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "markdown-it": "^12.3.2"
-  }
+  "license": "ISC"
 }

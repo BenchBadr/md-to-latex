@@ -1,21 +1,20 @@
-const md = require('markdown-it')();
+const {tokenize, nodeHandlers} = require('./parser');
 
 function markdownToLatex(mdText) {
-    const tokens = md.parse(mdText, {});
-    const ast = tokens.map(token => ({
-        type: token.type,
-        tag: token.tag,
-        content: token.content,
-        level: token.level
-    }));
-    console.log(ast);
-    return ast;
+    const tokens = tokenize(mdText);
+    console.log(tokens)
+    // return tokens.map(token => {
+    //     const handler = nodeHandlers[token.type][token.nodeType];
+    //     return handler ? handler(token) : '';
+    // }).join('');
 }
 
-markdownToLatex(`
+const out = markdownToLatex(`
 # Hello world  
 
 Ta mere *la* pute $5x$
 `)
+
+console.log(out)
 
 module.exports = markdownToLatex;

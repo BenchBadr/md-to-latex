@@ -1,0 +1,132 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage[french]{babel}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2cm, left=2cm, right=2cm}
+\usepackage{array}
+
+\begin{document}
+
+\noindent
+
+\begin{center}
+\hrule
+\vspace{.1cm}
+\begin{tabular}{>{\raggedright}p{0.45\textwidth} >{\raggedleft\arraybackslash}p{0.45\textwidth}}
+\textbf{Université Gustave Eiffel} & \textbf{Licence L1} \\
+\textbf{1er semestre 2023/2024} & \textbf{Calcul différentiel et intégral} \\
+\end{tabular}
+
+\vspace{.5cm}
+\textbf{Contrôle Continu 1 du 09 Novembre 2023} 
+\\
+\textbf{Correction} \\
+\textit{Les documents, calculatrices, portables et objets connectés sont interdits}
+\vspace{.5cm}
+\textcolor{gray}{\hrule}
+\end{center}
+
+
+\newcommand{\exercice}[2]{\vspace{1cm}
+\noindent \large \textbf{Exercice #1} \textit{(#2 points)}
+\vspace{0.1cm}
+\hrule
+\vspace{.5cm}
+}
+
+
+\exercice{1}{5}
+
+\begin{enumerate}
+    \item On considère l'équation $z^2+z+1-i = 0$ \\ On a $\Delta = (1)^2-4\cdot 1 \cdot (1-i) = -3+4i$ \\ On note $\delta$ une racine de $\Delta$ telle que $\delta = x+iy$ \\
+    \(\delta^2 = \Delta \Rightarrow 
+   \left\{
+\begin{array}{l}
+    x^2 - y^2 + 2ixy = -3 + 4i \\
+    x^2 + y^2 = |\delta|^2 = |\Delta| = \sqrt{3^2 + 4^2} = 5
+\end{array}
+\right. \\
+\Rightarrow \begin{cases}
+    x^2 - y^2 = -3 \\
+    2xy = 4 \\ 
+    x^2 + y^2 = 5
+\end{cases}
+\Rightarrow
+\begin{cases}
+    x^2 - y^2 = -3 \\
+    x^2 + y^2 = 5
+\end{cases}
+\Rightarrow 
+\begin{cases}
+2x^2 = 2 \\
+2y^2 = 8
+\end{cases}
+\\
+\Rightarrow \begin{cases}
+x = \pm 1 \\
+y = \pm 2
+
+\end{cases}
+   \) \\ \\
+Ainsi, les racines de $\Delta$ sont $1+2i$ et $1-2i$. \\
+Soient $z_1, z_2$ les solutions de l'équation:\\
+$
+z_1 = \frac{-1-(1+2i)}{2} = -1-i  \\
+z_2 = \frac{-1+(1-2i)}{2} = i
+$
+\item On a:  \begin{itemize}
+    \item Pour $z_1$, $Re(z_1) = 0$ et $Im(z_1) = 1$. On a
+    $|z_1| = 1$ \\
+    \begin{cases}
+    \cos(\theta) = \frac{Re(z_1)}{|z_1|} = \frac{0}{1} \\
+    \sin(\theta) = \frac{Im(z_1)}{|z_1|} = \frac{1}{1}
+    \end{cases} \Rightarrow \begin{cases}
+    \cos(\theta) = 0 \\
+    \sin(\theta) = 1 
+    \end{cases} \Rightarrow \theta = \frac{\pi}{2}$
+    \\ $\Rightarrow$ Ainsi $z_1 = e^{i\frac{\pi}{2}}$
+    \item Pour $z_2$, $Re(z_2) = -1$ et $Im(z_2) = -1$. On a $|z_2| = 2$ \\
+    \begin{cases}
+        \cos(\theta) = \frac{Re(z_2)}{|z_2|}=\frac{-1}{\sqrt{2}} = \frac{-\sqrt{2}}{2} \\
+        \sin(\theta) = \frac{Im(z_2)}{|z_2|}=\frac{-1}{\sqrt{2}} = \frac{-\sqrt{2}}{2}
+    \end{cases}$ \\
+    $\Rightarrow$ Ainsi, $z_2 = \sqrt{2}e^{i\frac{\pi}{5}}$ 
+    \clearpage
+\end{itemize}
+3. On cherche à résoudre $z^8+z^4+1-i=0$. On a: \\
+$z^8+z^4+1-i=0 \Leftrightarrow \begin{cases} 
+Z^2 + Z + 1 - i= 0 \\
+Z = z^4
+\end{cases}$
+\\ D'après la question (1):  \\
+\begin{cases}
+Z \in \{i;-1-i\} \\
+Z = z^4
+\end{cases}
+\end{enumerate}
+\\ Ainsi, on doit résoudre:\\
+\begin{matrix}
+z^4 = i = e^{i\frac{\pi}{2}} & \text{et} & z^4 = -1-i = \sqrt{2}e^{i\frac{\pi}{3}}
+\end{matrix} \\
+\begin{cases}
+z^4 = e^{i\frac{\pi}{2}} \\
+z = \rho e^{i\theta}
+\end{cases} \Leftrightarrow
+\begin{cases}
+    \rho^4 = 1 \\
+    4\theta = \frac{\pi}{2}[2\pi]
+\end{cases}
+\Rightarrow \begin{cases} 
+    \rho = 1 \\
+    \theta = \frac{\pi}{8}+\frac{2k\pi}{4} / k \in \mathbb{Z}
+\end{cases}
+\\ z^4 = e^{i\frac{\pi}{2}}\Leftrightarrow z \in \{\frac{5\pi}{8};\frac{9\pi}{8};\frac{13\pi}{8}\}$
+\\ et:
+$\begin{cases}
+    z^4 = \sqrt{}
+\end{cases}$
+
+\end{document}
