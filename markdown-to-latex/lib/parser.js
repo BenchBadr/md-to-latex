@@ -1,21 +1,18 @@
 function tokenize(markdown) {
-    let lastObjects = [];
     let inBlock = false;
     const output = [];
 
-    const inlineSyntaxes = {
-        bold: /\*\*(.*?)\*\*/g,
-        italic: /\*(.*?)\*/g,
-        strikethrough: /~~(.*?)~~/g,
-        underline: /__(.*?)__/g,
-    }
+    const inlineSyntaxes = [
+        { type: 'bold', regex: /\*\*(.*?)\*\*/g, render: true },
+        { type: 'italic', regex: /\*(.*?)\*/g, render: true },
+        { type: 'strikethrough', regex: /~~(.*?)~~/g, render: true },
+        { type: 'underline', regex: /__(.*?)__/g, render: true },
+        { type: 'code', regex: /`(.*?)`/g, render: false },
+        { type: 'link', regex: /\[(.*?)\]\((.*?)\)/g, render: false },
+        { type: 'image', regex: /!\[(.*?)\]\((.*?)\)/g, render: false },
+        { type: 'inlineMath', regex: /\$(.*?)\$/g, render: false }
+    ]
 
-    const inlineEscape = {
-        code: /`(.*?)`/g,
-        link: /\[(.*?)\]\((.*?)\)/g,
-        image: /!\[(.*?)\]\((.*?)\)/g,
-        inlineMath: /\$(.*?)\$/g,
-    }
 
     const blockSyntaxes = {
         blockCode: /^```/g,
@@ -31,6 +28,27 @@ function tokenize(markdown) {
         h6: /^######\s(.*)/,
         blockquote: /^>(.*)/
     };
+
+    function tokenInline(content) {
+        if (!content) return [];
+        const output = [];
+        let lastIdx = 0;
+        for (const syntax of inlineSyntaxes) {
+            const match = content.slice(lastIdx).matchAll(syntax.regex);
+            const matches = [...match];
+            if (matches.length){
+                content.slice(lastIdx, matches[0].index) && output.push({key:'text',content:content.slice(lastIdx, matches[0].index)});
+                matches.forEach((m) => {
+                    const l =  (syntax.regex).source.replaceAll('\\', '').replaceAll('(.*?)','').length;
+                    output.push({key:syntax.type,content:syntax.render ? tokenInline(m[1]) : {key:'text',content:m[1]}});
+                    lastIdx = l+m.index+m[1].length;
+                })
+            }
+        }
+        content.slice(lastIdx) && output.push({key:'text',content:content.slice(lastIdx)});
+        return output;
+    }
+    
 
     function getBlock(line, checkBlock = true) {
         const trimmedLine = line.trim();
@@ -60,6 +78,7 @@ function tokenize(markdown) {
                     return;
                 } else if (inBlock === key){
                     inBlock = false;
+                    return;
                 }
             }
 
@@ -67,23 +86,22 @@ function tokenize(markdown) {
                 output[output.length - 1].content+=`${line}\n`;
             } else {
                 const key = getBlock(line, false) || 'paragraph';
-                console.log(key)
-                let content = [];
-                // continue here
+                output.push({
+                    type: key,
+                    content: tokenInline(line.split(' ').slice(1).join(' ')),
+                })
             }
         }
     });
-    
+
     return output
 };
 
 
 
 const markdown = `
-# Hello **world** *hello*
-hello
-__hello__
-**__hello__**
+# Hello **__test__ hello**
+> Hello
 `;
 
 console.log(tokenize(markdown));
